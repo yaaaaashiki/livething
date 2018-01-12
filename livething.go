@@ -8,7 +8,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/livething/db"
 	"github.com/yaaaaashiki/livething/domain/slack"
-	"github.com/yaaaaashiki/livething/domain/usecase"
+	"github.com/yaaaaashiki/livething/usecase"
 )
 
 // This holds database connection and router settings based on gin.
