@@ -63,3 +63,5 @@ assets/js
 public/js
 .env
 
+# Ignore goland setting files
+.idea/
