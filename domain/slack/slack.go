@@ -1,4 +1,4 @@
-package service
+package slack
 
 import (
 	"encoding/json"
