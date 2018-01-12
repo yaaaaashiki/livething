@@ -7,6 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/livething/db"
+	"github.com/yaaaaashiki/livething/domain/slack"
+	"github.com/yaaaaashiki/livething/domain/usecase"
 )
 
 // This holds database connection and router settings based on gin.
@@ -51,6 +53,9 @@ func (s *Server) Run(addr string) {
 
 func (s *Server) Route() {
 	r := s.gin
+
+	slackService := slack.NewSlackAPIService(env.SlackAPIUrl)
+	notificationUsecase := usecase.NewNotificationUsecase(slackService)
 
 	r.POST("/slack", func(c *gin.Context) {
 		//
