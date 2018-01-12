@@ -20,16 +20,16 @@ type msgModel struct {
 func NewSlackAPIService(url string) *SlackAPIService {
 	return &SlackAPIService{url}
 }
-func (self *SlackAPIService) SendMsg(msg string) error {
+func (s *SlackAPIService) SendMsg(msg string) error {
 	msgJson, err := json.Marshal(msgModel{msg})
 	if err != nil {
 		return err
 	}
-	return self.send(msgJson)
+	return s.send(msgJson)
 
 }
-func (self *SlackAPIService) send(body []byte) error {
-	req, _ := http.NewRequest("POST", self.url, bytes.NewReader(body))
+func (s *SlackAPIService) send(body []byte) error {
+	req, _ := http.NewRequest("POST", s.url, bytes.NewReader(body))
 	req.Header.Set("Content-type", "application/json")
 
 	client := new(http.Client)
