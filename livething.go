@@ -1,14 +1,11 @@
-package cstack
+package livething
 
 import (
 	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/livething/db"
-	"github.com/yaaaaashiki/livething/domain/slack"
-	"github.com/yaaaaashiki/livething/usecase"
 )
 
 // This holds database connection and router settings based on gin.
@@ -52,16 +49,19 @@ func (s *Server) Run(addr string) {
 }
 
 func (s *Server) Route() {
-	r := s.gin
+	/*
+		r := s.gin
 
-	slackService := slack.NewSlackAPIService(env.SlackAPIUrl)
-	notificationUsecase := usecase.NewNotificationUsecase(slackService)
+		slackService := slack.NewSlackAPIService(env.SlackAPIUrl)
+		notificationUsecase := usecase.NewNotificationUsecase(slackService)
 
-	r.POST("/slack", func(c *gin.Context) {
-		//
-		c.JSON(http.StatusOK, gin.H{
-			"status": "OK!",
+		r.POST("/slack", func(c *gin.Context) {
+			//
+			c.JSON(http.StatusOK, gin.H{
+				"status": "OK!",
+			})
 		})
-	})
-	r.Run(":3000")
+		r.Run(":3000")
+	*/
+	//helper.PingStaticIP()
 }

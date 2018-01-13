@@ -18,7 +18,7 @@ func main() {
 		debug  = flag.Bool("debug", false, "debug mode. default is false.")
 	)
 	flag.Parse()
-	b := cstack.New()
+	b := livething.New()
 	b.Init(*dbconf, *env, *debug)
 	b.Run(*addr)
 }
