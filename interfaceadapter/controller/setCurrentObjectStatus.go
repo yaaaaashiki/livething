@@ -8,11 +8,16 @@ import (
 	"github.com/gin-gonic/gin/binding"
 	"github.com/labstack/gommon/log"
 	"github.com/yaaaaashiki/cstack/helper"
+	"github.com/yaaaaashiki/cstack/usecase"
 )
 
 const (
 	exist = "1"
 )
+
+type SetCurrentObjectStatusController struct {
+	setCurrentObjectStatusUseCase *usecase.SetCurrentObjectStatusUseCase
+}
 
 type InputObjectField struct {
 	Value string `binding:"required" json:"value"`
@@ -22,8 +27,10 @@ type InputObjectField struct {
 //Reference this varibale to check object status
 var Status bool
 
-func NewSetCurrentObjectStatusController() {
-
+func NewSetCurrentObjectStatusController(SetCurrentObjectStatusUseCase *usecase.setCurrentObjectStatusUseCase) *SetCurrentObjectStatusController {
+  return &SetCurrentObjectStatusController{
+  	setCurrentObjectStatusUseCase: setCurrentObjectStatusUseCase
+  }
 }
 
 func CheckStatus(c *gin.Context) (bool, error) {
