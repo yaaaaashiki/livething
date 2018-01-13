@@ -49,9 +49,9 @@ func (s *Server) Run(addr string) {
 }
 
 func (s *Server) Route() {
-	/*
-		r := s.gin
 
+	r := s.gin
+	/*
 		slackService := slack.NewSlackAPIService(env.SlackAPIUrl)
 		notificationUsecase := usecase.NewNotificationUsecase(slackService)
 
@@ -63,5 +63,8 @@ func (s *Server) Route() {
 		})
 		r.Run(":3000")
 	*/
-	//helper.PingStaticIP()
+
+	setIlluminationValue
+
+	//wifi.PingStaticIP()
 }
