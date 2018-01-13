@@ -1,4 +1,4 @@
-package main
+package helper
 
 import (
 	"fmt"
@@ -7,11 +7,10 @@ import (
 )
 
 const (
-	staticIP = "127.0.0.2"
+	staticIP = "127.0.0.1"
 )
 
-//PingStaticIP
-func main() {
+func PingStaticIP() {
 	/*
 		res := exec.Command(ping, staticIP)
 		res.Stdout = os.Stdout
