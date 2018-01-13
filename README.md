@@ -1,3 +1,3 @@
-# WorkStation clean up app
+# WorkStation cleaning up app
 
 ## Arudino + Golang
