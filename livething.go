@@ -65,7 +65,7 @@ func (s *Server) Route() {
 		r.Run(":3000")
 	*/
 
-	object.SetStatus()
+	r.POST("/objects", object.SetStatus())
 
 	//wifi.PingStaticIP()
 }
