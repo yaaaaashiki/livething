@@ -9,17 +9,29 @@ import (
 	"github.com/yaaaaashiki/livething/helper"
 )
 
-type Illumination struct {
-	Value int `binding:"required" json:"value"`
+const (
+	exist = "1"
+)
+
+type InputObjectField struct {
+	Value  string `binding:"required" json:"value"`
+	Name   string `binding:"required" json:"name"`
+	Status bool
 }
 
-func setCurrentIlluminationValue(c *gin.Context) {
+func setCurrentObjectStatus(c *gin.Context) {
 
-	illumination := &Illumination{}
+	illumination := &InputObjectField{}
 
 	if err := c.MustBindWith(illumination, binding.JSON); err != nil {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
 		return
+	}
+
+	if illumination.Value == exist {
+		illumination.Status = true
+	} else {
+		illumination.Status = false
 	}
 
 	fmt.Println(illumination.Value)
