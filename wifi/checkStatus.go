@@ -1,9 +1,8 @@
-package main //helper
+package wifi
 
 //If ping status is no problem, return true
 //Otherwise, return false
-
-func checkWifiStatus() bool {
+func CheckStatus() bool {
 	res := PingStaticIP()
 	if res == nil {
 		return false

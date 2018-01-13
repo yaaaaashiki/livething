@@ -1,4 +1,4 @@
-package main // helper
+package wifi
 
 import (
 	"fmt"

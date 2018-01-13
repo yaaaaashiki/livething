@@ -1,7 +1,6 @@
-package main
+package wifi
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -10,10 +9,17 @@ const (
 	zeroValue = 0
 )
 
-func main() {
+var Status bool
+
+func getCurrentStatus() {
 	numberOfRoop := 0
+
 	for {
-		fmt.Println(checkWifiStatus())
+		if numberOfRoop >= 5 {
+			break
+		}
+		//fmt.Println(checkWifiStatus())
+		Status = checkWifiStatus()
 		if numberOfRoop != zeroValue {
 			time.Sleep(interval * time.Second)
 		}
