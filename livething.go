@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/livething/db"
-	"github.com/yaaaaashiki/livething/helper"
 )
 
 // This holds database connection and router settings based on gin.
@@ -64,5 +63,5 @@ func (s *Server) Route() {
 		})
 		r.Run(":3000")
 	*/
-	helper.PingStaticIP()
+	//helper.PingStaticIP()
 }
