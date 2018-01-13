@@ -1,4 +1,4 @@
-package object
+package controller
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	"github.com/labstack/gommon/log"
 	"github.com/yaaaaashiki/cstack/helper"
 )
 
@@ -21,21 +22,28 @@ type InputObjectField struct {
 //Reference this varibale to check object status
 var Status bool
 
-func CheckStatus() bool {
+func NewSetCurrentObjectStatusController() {
+
+}
+
+func CheckStatus(c *gin.Context) (bool, error) {
 	object := &InputObjectField{}
 
 	if err := c.MustBindWith(object, binding.JSON); err != nil {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
-		return
+		return false, err
 	}
 
 	if object.Value == exist {
-		return true
+		return true, nil
 	}
-	return false
+	return false, nil
 }
 
 func SetStatus(c *gin.Context) {
-	Status = CheckStatus()
+	Status, err := CheckStatus(c)
+	if err != nil {
+		log.Errorf(err.Error())
+	}
 	fmt.Println(Status) // for debug. TODO remove this code
 }
