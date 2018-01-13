@@ -2,6 +2,7 @@ package helper
 
 import (
 	"fmt"
+	"log"
 
 	ping "github.com/sparrc/go-ping"
 )
@@ -10,7 +11,7 @@ const (
 	staticIP = "127.0.0.1"
 )
 
-func PingStaticIP() {
+func PingStaticIP() *ping.Statistics {
 	/*
 		res := exec.Command(ping, staticIP)
 		res.Stdout = os.Stdout
@@ -20,9 +21,11 @@ func PingStaticIP() {
 
 	pinger, err := ping.NewPinger(staticIP)
 	if err != nil {
-		fmt.Fprintf(err)
+		log.Println(err)
 	}
 	pinger.Count = 3
 	pinger.Run()                 // blocks until finished
-	stats := pinger.Statistics() // get send/receive/rtt stats
+	res := pinger.Statistics() // get send/receive/rtt stats
+	fmt.Println(res)
+	return res
 }
