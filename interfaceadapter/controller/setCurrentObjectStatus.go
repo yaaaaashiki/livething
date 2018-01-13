@@ -54,3 +54,7 @@ func SetStatus(c *gin.Context) {
 	}
 	fmt.Println(Status) // for debug. TODO remove this code
 }
+
+func (s *SetCurrentObjectStatusController) Execute(c *gin.Context) {
+  SetStatus(c)
+}
