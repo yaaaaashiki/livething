@@ -61,6 +61,8 @@ func (s *Server) Route() {
 		c.HTML(200, "index.html", nil)
 	})
 
+	api := r.Group("/api")
+
 	objectRepository := repository.NewObjectRepository(s.db)
 	setCurrentObjectStatusUseCase := usecase.NewSetCurrentObjectStatusUseCase(objectRepository)
 	setCurrentObjectStatusController := controller.NewSetCurrentObjectStatusController(setCurrentObjectStatusUseCase)
@@ -78,7 +80,7 @@ func (s *Server) Route() {
 		r.Run(":3000")
 	*/
 
-	r.POST("/objects", setCurrentObjectStatusController.Execute)
+	api.POST("/objects", setCurrentObjectStatusController.Execute)
 
 	//wifi.PingStaticIP()
 }
