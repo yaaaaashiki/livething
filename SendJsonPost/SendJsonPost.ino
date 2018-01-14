@@ -15,8 +15,7 @@ String END_POINT = "/ReceivePost.php";
 EthernetClient client;
 
 int val = 0; // value from light sensor
-int vals[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // values for calculating average.
-int ave = 0; // average 
+int pre = 0; // pre-value
 int flag = 0; // Put on: 1, Put off: 0. initialized as 0
 String objname = "\"object\""; // object name.
 
@@ -40,14 +39,14 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   val = analogRead(0);
-  ave = update_average(val);
 
   Serial.print("val= ");
   Serial.println(val);
-  Serial.print("ave= ");
-  Serial.println(ave);
+  Serial.print("pre= ");
+  Serial.println(pre);
 
-  if(vals[9] != 0){
+  //if(vals[9] != 0){
+  if(pre != 0){
     flag = Calc(val);
     
     if(!client.available()){
@@ -60,7 +59,9 @@ void loop() {
       client.stop();
     }
   }
-  delay(5000);
+  delay(2000);
+
+  pre = val;
 
 }
 
@@ -94,27 +95,13 @@ bool post(int val) {
 }
 
 int Calc(int val){
-  if(abs(val - ave) >= 50){
-    if(val > ave){
+  if(abs(val - pre) >= 50){
+    if(val < pre){
       return 0; //Put off object.
     }else{
       return 1; //Put on object.
     }
   }
 
-  return val;
+  return flag;
 }
-
-int update_average(int val){
-  int total = 0;
-  for (int i=9;i>0;i--){
-    vals[i] = vals[i-1];
-    total += vals[i];
-  }
-  
-  total += val;
-  vals[0] = val;
-
-  return total / 10;
-}
-

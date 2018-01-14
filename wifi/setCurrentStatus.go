@@ -23,7 +23,7 @@ func CheckStatus() bool {
 	return true
 }
 
-func setCurrentStatus() {
+func SetCurrentStatus() {
 	numberOfRoop := 0
 
 	for {
