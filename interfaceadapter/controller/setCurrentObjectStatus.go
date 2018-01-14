@@ -25,7 +25,7 @@ type InputObjectField struct {
 }
 
 //Reference this varibale to check object status
-var Status bool
+var ObjectStatus bool
 
 func NewSetCurrentObjectStatusController(setCurrentObjectStatusUseCase *usecase.SetCurrentObjectStatusUseCase) *SetCurrentObjectStatusController {
 	return &SetCurrentObjectStatusController{
@@ -48,11 +48,11 @@ func CheckStatus(c *gin.Context) (bool, error) {
 }
 
 func SetStatus(c *gin.Context) {
-	Status, err := CheckStatus(c)
+	ObjectStatus, err := CheckStatus(c)
 	if err != nil {
 		log.Errorf(err.Error())
 	}
-	fmt.Println(Status) // for debug. TODO remove this code
+	fmt.Println(ObjectStatus) // for debug. TODO remove this code
 }
 
 func (s *SetCurrentObjectStatusController) Execute(c *gin.Context) {
