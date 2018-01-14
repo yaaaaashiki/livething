@@ -1,7 +1,6 @@
 package wifi
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -33,7 +32,7 @@ func SetCurrentStatus() {
 				break
 			}
 		*/
-		fmt.Println(CheckStatus())
+		//fmt.Println(CheckStatus())
 		Status = CheckStatus()
 		if numberOfRoop != zeroValue {
 			time.Sleep(interval * time.Second)
