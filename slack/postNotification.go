@@ -20,7 +20,6 @@ const (
 	illuminationInterval = 60
 	wifiInterval         = 15
 	zeroValue            = 0
-	firstTime            = 0
 	alertRoopTimes       = 5
 )
 
@@ -38,12 +37,11 @@ func setAlertText(objectName string) string {
 	return alertText
 }
 
-func curlRequest(text string) {
+func sendCurlRequest(text string) {
 	params, _ := json.Marshal(Slack{
 		text:        text,
-		username:    userName,
+		userName:    userName,
 		iconName:    iconName,
-		iconURI:     "",
 		channelName: channelName})
 
 	resp, _ := http.PostForm(
@@ -53,6 +51,7 @@ func curlRequest(text string) {
 
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
+	println(string(body))
 }
 
 func PostNotification() {
@@ -68,14 +67,14 @@ func PostNotification() {
 
 		if roopTimesCounter >= alertRoopTimes {
 			setAlertText(object.Name)
-			curlRequest(alertText)
+			sendCurlRequest(alertText)
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter = zeroValue
 			continue
 		}
 
-		if roopTimesCounter == firstTime {
-			curlRequest(returningHomeText)
+		if roopTimesCounter == zeroValue {
+			sendCurlRequest(returningHomeText)
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter++
 			continue

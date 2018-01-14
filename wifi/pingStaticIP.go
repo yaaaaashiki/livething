@@ -9,6 +9,7 @@ import (
 
 const (
 	staticIP = "133.2.210.50"
+	sendPingTimes = 3
 )
 
 func PingStaticIP() *ping.Statistics {
@@ -17,7 +18,7 @@ func PingStaticIP() *ping.Statistics {
 		log.Println(err)
 	}
 
-	pinger.Count = 3
+	pinger.Count = sendPingTimes
 	pinger.Run()               // blocks until finished
 	res := pinger.Statistics() // get send/receive/rtt stats
 	fmt.Println(res)

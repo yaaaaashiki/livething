@@ -36,26 +36,24 @@ func NewSetCurrentObjectStatusController(setCurrentObjectStatusUseCase *usecase.
 	}
 }
 
-func CheckStatus(c *gin.Context) (bool, error) {
+func CheckStatus(c *gin.Context) bool {
 	object := &InputObjectField{}
 
 	if err := c.MustBindWith(object, binding.JSON); err != nil {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
-		return false, err
+		return false
 	}
 
 	if object.Value == exist {
-		return true, nil
+		return true
 	}
-	return false, nil
+	return false
 }
 
 func SetStatus(c *gin.Context) {
-	object = &Object{}
-	object.Status, err := CheckStatus(c)
-	if err != nil {
-		log.Errorf(err.Error())
-	}
+	object := &Object{}
+	object.Status = CheckStatus(c)
+
 	fmt.Println(object.Status) // for debug. TODO remove this code
 }
 

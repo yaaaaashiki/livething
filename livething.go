@@ -56,11 +56,9 @@ func (s *Server) Run(addr string) {
 }
 
 func (s *Server) Route() {
-
 	r := s.gin
 
 	r.LoadHTMLGlob("view/*")
-
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", nil)
 	})
