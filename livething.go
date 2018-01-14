@@ -83,5 +83,5 @@ func (s *Server) Route() {
 
 	api.POST("/objects", setCurrentObjectStatusController.Execute)
 
-	wifi.SetCurrentStatus()
+	go wifi.SetCurrentStatus()
 }
