@@ -34,7 +34,6 @@ type Slack struct {
 }
 
 func setAlertText(objectName string) string {
-	object := &controller.Object{}
 	alertText = "Put" + objectName + "on the home position"
 	return alertText
 }
