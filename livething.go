@@ -8,6 +8,7 @@ import (
 	"github.com/yaaaaashiki/livething/db"
 	"github.com/yaaaaashiki/livething/domain/repository"
 	"github.com/yaaaaashiki/livething/interfaceadapter/controller"
+	"github.com/yaaaaashiki/livething/slack"
 	"github.com/yaaaaashiki/livething/usecase"
 	"github.com/yaaaaashiki/livething/wifi"
 )
@@ -44,6 +45,7 @@ func (s *Server) Init(dbconf, env string, debug bool) {
 	s.gin = gin.Default()
 	s.Route()
 	go wifi.SetCurrentStatus()
+	go slack.PostNotification()
 }
 
 // Run starts running http server.
