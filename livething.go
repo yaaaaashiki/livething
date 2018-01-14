@@ -43,6 +43,7 @@ func (s *Server) Init(dbconf, env string, debug bool) {
 	s.db = db
 	s.gin = gin.Default()
 	s.Route()
+	go wifi.SetCurrentStatus()
 }
 
 // Run starts running http server.
@@ -82,6 +83,4 @@ func (s *Server) Route() {
 	*/
 
 	api.POST("/objects", setCurrentObjectStatusController.Execute)
-
-	go wifi.SetCurrentStatus()
 }
