@@ -6,7 +6,7 @@ import (
 
 const (
 	interval  = 5
-	floatZero = 0.0
+	zeroValue = 0
 )
 
 //Reference this varibale to check wifi status
@@ -16,7 +16,7 @@ var Status bool
 //Otherwise, return false
 func CheckStatus() bool {
 	res := PingStaticIP()
-	if res.PacketLoss == floatZero {
+	if res.PacketLoss == zeroValue {
 		return true
 	}
 	return false
