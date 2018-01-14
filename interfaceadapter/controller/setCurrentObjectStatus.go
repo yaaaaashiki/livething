@@ -6,7 +6,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"github.com/labstack/gommon/log"
 	"github.com/yaaaaashiki/livething/helper"
 	"github.com/yaaaaashiki/livething/usecase"
 )
