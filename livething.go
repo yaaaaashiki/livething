@@ -69,18 +69,5 @@ func (s *Server) Route() {
 	setCurrentObjectStatusUseCase := usecase.NewSetCurrentObjectStatusUseCase(objectRepository)
 	setCurrentObjectStatusController := controller.NewSetCurrentObjectStatusController(setCurrentObjectStatusUseCase)
 
-	/*
-		slackService := slack.NewSlackAPIService(env.SlackAPIUrl)
-		notificationUsecase := usecase.NewNotificationUsecase(slackService)
-
-		r.POST("/slack", func(c *gin.Context) {
-			//
-			c.JSON(http.StatusOK, gin.H{
-				"status": "OK!",
-			})
-		})
-		r.Run(":3000")
-	*/
-
 	api.POST("/objects", setCurrentObjectStatusController.Execute)
 }
