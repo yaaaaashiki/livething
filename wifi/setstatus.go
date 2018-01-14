@@ -15,8 +15,8 @@ var Status bool
 
 //If ping status is no problem, return true
 //Otherwise, return false
-func CheckStatus() bool {
-	res := PingStaticIP()
+func checkStatus() bool {
+	res := sendPing()
 	if res.PacketLoss == zeroValue {
 		return true
 	}
@@ -28,7 +28,7 @@ func SetCurrentStatus() {
 
 	for {
 		fmt.Println(CheckStatus())
-		Status = CheckStatus()
+		Status = checkStatus()
 		if numberOfRoop != zeroValue {
 			time.Sleep(interval * time.Second)
 		}

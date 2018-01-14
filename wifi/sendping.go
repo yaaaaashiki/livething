@@ -8,11 +8,11 @@ import (
 )
 
 const (
-	staticIP = "133.2.210.50"
+	staticIP      = "133.2.210.50"
 	sendPingTimes = 3
 )
 
-func PingStaticIP() *ping.Statistics {
+func sendPing() *ping.Statistics {
 	pinger, err := ping.NewPinger(staticIP)
 	if err != nil {
 		log.Println(err)
