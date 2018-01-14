@@ -1,4 +1,4 @@
-package slack
+package main
 
 import (
 	"encoding/json"
@@ -6,10 +6,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"time"
-
-	"github.com/yaaaaashiki/livething/interfaceadapter/controller"
-	"github.com/yaaaaashiki/livething/wifi"
 )
 
 const (
@@ -23,8 +19,6 @@ const (
 	zeroValue            = 0
 )
 
-var alertText string
-
 type Slack struct {
 	Text       string `json:"text"`
 	Username   string `json:"username"`
@@ -34,15 +28,16 @@ type Slack struct {
 }
 
 var (
+	// change token
 	IncomingUrl string = "https://hooks.slack.com/services/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"
 )
 
-func sendCurlRequest(text string) {
+func sendCurlRequest(arg string) {
 	params, _ := json.Marshal(Slack{
-		fmt.Sprintf("%s", text),
-		"livething",
+		fmt.Sprintf("%s", arg),
+		"MyBot",
 		"",
-		"",
+		"http://www.icons101.com/icons/66/NuoveXT_by_Alexandre_Moore/128/slackware.png",
 		"#notification"})
 
 	resp, _ := http.PostForm(
@@ -56,35 +51,6 @@ func sendCurlRequest(text string) {
 	println(string(body))
 }
 
-func PostNotification() {
-	roopTimesCounter := zeroValue
-
-	for {
-		object := &controller.Object{}
-
-		if wifi.Status == false {
-			time.Sleep(wifiInterval * time.Second)
-			continue
-		}
-
-		if roopTimesCounter >= alertRoopTimes {
-			setAlertText(object.Name)
-			sendCurlRequest(alertText)
-			time.Sleep(illuminationInterval * time.Second)
-			roopTimesCounter = zeroValue
-			continue
-		}
-
-		if roopTimesCounter == zeroValue {
-			sendCurlRequest(returningHomeText)
-			time.Sleep(illuminationInterval * time.Second)
-			roopTimesCounter++
-			continue
-		}
-
-		if object.Status == false {
-			time.Sleep(illuminationInterval * time.Second)
-			roopTimesCounter++
-		}
-	}
+func main() {
+	sendCurlRequest("aaa")
 }
