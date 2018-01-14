@@ -9,6 +9,7 @@ import (
 	"github.com/yaaaaashiki/livething/domain/repository"
 	"github.com/yaaaaashiki/livething/interfaceadapter/controller"
 	"github.com/yaaaaashiki/livething/usecase"
+	"github.com/yaaaaashiki/livething/wifi"
 )
 
 // This holds database connection and router settings based on gin.
@@ -82,5 +83,5 @@ func (s *Server) Route() {
 
 	api.POST("/objects", setCurrentObjectStatusController.Execute)
 
-	//wifi.PingStaticIP()
+	wifi.SetCurrentStatus()
 }

@@ -28,10 +28,11 @@ func SetCurrentStatus() {
 
 	for {
 		// For debug
-		if numberOfRoop >= 5 {
-			break
-		}
-
+		/*
+			if numberOfRoop >= 5 {
+				break
+			}
+		*/
 		fmt.Println(CheckStatus())
 		Status = CheckStatus()
 		if numberOfRoop != zeroValue {
