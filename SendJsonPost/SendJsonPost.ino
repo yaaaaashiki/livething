@@ -3,21 +3,28 @@
 #include <ArduinoJson.h>
 
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x0F, 0x3F, 0xF4 };
-byte ip[] = {133, 2, 208, 174};
-byte gateway[] = { 133, 2, 208, 254};
+//byte ip[] = {133, 2, 208, 174};
+//byte gateway[] = { 133, 2, 208, 254};
+//byte subnetmask[] = {255, 255, 255, 128};
+
+byte ip[] = {133, 2, 210, 36};
+byte gateway[] = { 133, 2, 210, 126};
 byte subnetmask[] = {255, 255, 255, 128};
 
-byte HOST[] = { 133, 2, 208, 182 };
-int PORT = 5000;
-String hoststr = "133.2.208.182";
-String END_POINT = "/ReceivePost.php";
+//byte HOST[] = { 100, 70, 3, 126 };
+byte HOST[] = { 133, 2, 210, 35};
+int PORT = 8081;
+//int PORT = 5000;
+String hoststr = "100.70.3.126";
+String END_POINT = "/api/objects";
+//String END_POINT = "/ReceivePost.py";
 
 EthernetClient client;
 
 int val = 0; // value from light sensor
 int pre = 0; // pre-value
 int flag = 0; // Put on: 1, Put off: 0. initialized as 0
-String objname = "\"object\""; // object name.
+String objname = "\"Smartphone\""; // object name.
 
 void setup() {
   // put your setup code here, to run once:
@@ -59,7 +66,7 @@ void loop() {
       client.stop();
     }
   }
-  delay(2000);
+  delay(60000);
 
   pre = val;
 
@@ -69,7 +76,7 @@ bool post(int val) {
     Serial.println("connecting...");
     if (client.connect(HOST, PORT)) {
         Serial.println("connected");
-        String json_data = "{\"value\":" + String(val) + ", \"name\":" + objname + "}";
+        String json_data = "{\"value\":\"" + String(val) + "\", \"name\":" + objname + "}";
  
         client.println("POST " + END_POINT + " HTTP/1.1");
         client.print("Host: ");
