@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	staticIP = "127.0.0.1"
+	staticIP = "133.2.210.50"
 )
 
 func PingStaticIP() *ping.Statistics {
