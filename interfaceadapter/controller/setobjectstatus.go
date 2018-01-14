@@ -23,7 +23,6 @@ type InputObjectField struct {
 	Name  string `binding:"required" json:"name"`
 }
 
-//Reference this varibale to check object status
 type Object struct {
 	Status bool
 	Name   string
