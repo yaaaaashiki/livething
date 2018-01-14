@@ -37,6 +37,12 @@ var (
 	IncomingUrl string = "https://hooks.slack.com/services/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"
 )
 
+func setAlertText(objectName string) string {
+	object := &controller.Object{}
+	alertText = "Put" + objectName + "on the home position"
+	return alertText
+}
+
 func sendCurlRequest(text string) {
 	params, _ := json.Marshal(Slack{
 		fmt.Sprintf("%s", text),
