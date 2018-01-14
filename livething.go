@@ -6,6 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/livething/db"
+	"github.com/yaaaaashiki/livething/domain/repository"
+	"github.com/yaaaaashiki/livething/interfaceadapter/controller"
+	"github.com/yaaaaashiki/livething/usecase"
 )
 
 // This holds database connection and router settings based on gin.
@@ -49,9 +52,22 @@ func (s *Server) Run(addr string) {
 }
 
 func (s *Server) Route() {
-	/*
-		r := s.gin
 
+	r := s.gin
+
+	r.LoadHTMLGlob("view/*")
+
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(200, "index.html", nil)
+	})
+
+	api := r.Group("/api")
+
+	objectRepository := repository.NewObjectRepository(s.db)
+	setCurrentObjectStatusUseCase := usecase.NewSetCurrentObjectStatusUseCase(objectRepository)
+	setCurrentObjectStatusController := controller.NewSetCurrentObjectStatusController(setCurrentObjectStatusUseCase)
+
+	/*
 		slackService := slack.NewSlackAPIService(env.SlackAPIUrl)
 		notificationUsecase := usecase.NewNotificationUsecase(slackService)
 
@@ -63,5 +79,8 @@ func (s *Server) Route() {
 		})
 		r.Run(":3000")
 	*/
-	//helper.PingStaticIP()
+
+	api.POST("/objects", setCurrentObjectStatusController.Execute)
+
+	//wifi.PingStaticIP()
 }

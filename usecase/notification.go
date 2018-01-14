@@ -1,5 +1,6 @@
 package usecase
 
+/*
 import (
 	"fmt"
 	"time"
@@ -29,3 +30,4 @@ func (self *NotificationUsecase) Execute() {
 		//fmt.Printf("[notification]%s [%s] is send!", time.Now().String(), hoge)
 	}
 }
+*/
