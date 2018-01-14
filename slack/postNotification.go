@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"os"
 	"time"
 
 	"github.com/yaaaaashiki/livething/interfaceadapter/controller"
@@ -16,7 +17,6 @@ const (
 	userName             = "livething"
 	returningHomeText    = "Welcome home!!!"
 	iconName             = "warning"
-	postURI              = "https://hooks.slack.com/services/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"
 	illuminationInterval = 60
 	wifiInterval
 	zeroValue      = 0
@@ -47,7 +47,7 @@ func curlRequest(text string) {
 		channelName: channelName})
 
 	resp, _ := http.PostForm(
-		postURI,
+		os.Getenv("WEBHOOKURI"),
 		url.Values{"payload": {string(params)}},
 	)
 
