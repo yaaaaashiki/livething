@@ -18,10 +18,10 @@ const (
 	returningHomeText    = "Welcome home!!!"
 	iconName             = "warning"
 	illuminationInterval = 60
-	wifiInterval
-	zeroValue      = 0
-	firstTime      = 0
-	alertRoopTimes = 5
+	wifiInterval         = 15
+	zeroValue            = 0
+	firstTime            = 0
+	alertRoopTimes       = 5
 )
 
 var alertText string
@@ -34,6 +34,7 @@ type Slack struct {
 }
 
 func setAlertText(objectName string) string {
+	object := &controller.Object{}
 	alertText = "Put" + objectName + "on the home position"
 	return alertText
 }
@@ -55,18 +56,19 @@ func curlRequest(text string) {
 	body, _ := ioutil.ReadAll(resp.Body)
 }
 
-func PostNotification(objectName string) {
-
+func PostNotification() {
 	roopTimesCounter := zeroValue
 
 	for {
+		object := &controller.Object{}
+
 		if wifi.Status == false {
 			time.Sleep(wifiInterval * time.Second)
 			continue
 		}
 
 		if roopTimesCounter >= alertRoopTimes {
-			setAlertText(objectName)
+			setAlertText(object.Name)
 			curlRequest(alertText)
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter = zeroValue
@@ -80,7 +82,7 @@ func PostNotification(objectName string) {
 			continue
 		}
 
-		if controller.ObjectStatus == false {
+		if object.Status == false {
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter++
 		}
