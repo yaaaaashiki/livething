@@ -27,7 +27,7 @@ func SetCurrentStatus() {
 	numberOfRoop := 0
 
 	for {
-		fmt.Println(CheckStatus())
+		fmt.Println(checkStatus())
 		Status = checkStatus()
 		if numberOfRoop != zeroValue {
 			time.Sleep(interval * time.Second)
