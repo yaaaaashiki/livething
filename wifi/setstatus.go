@@ -1,7 +1,6 @@
 package wifi
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/yaaaaashiki/livething/model"
@@ -30,8 +29,6 @@ func SetCurrentStatus(wf *model.Wifi) {
 	numberOfRoop := 0
 
 	for {
-		fmt.Println(checkStatus())
-		//Wifichan.Status = checkStatus()
 		wf.Status = checkStatus()
 		if numberOfRoop != zeroValue {
 			time.Sleep(interval * time.Second)

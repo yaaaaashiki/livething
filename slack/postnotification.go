@@ -34,12 +34,11 @@ var (
 	IncomingUrl string = "https://hooks.slack.com/services/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"
 )
 
-/*
-func setAlertText(objectName string) string {
-	alertText := "Put" + objectName + "on the home position"
-	return alertText
+func setAlertText(objectName string) (alertText string) {
+	alertText = "Put" + objectName + "on the home position"
+	return
 }
-*/
+
 func sendCurlRequest(text string) {
 	params, _ := json.Marshal(Slack{
 		fmt.Sprintf("%s", text),
@@ -62,22 +61,14 @@ func sendCurlRequest(text string) {
 func PostNotification(object *model.Object, wifi *model.Wifi) {
 	roopTimesCounter := zeroValue
 	consecutiveCounter := zeroValue
-	//alertText := ""
 	for {
-		/*
-			fmt.Printf("object status: ")
-			fmt.Println(object.Status)
-			fmt.Println(object.Name)
-		*/
 		if wifi.Status == false {
 			time.Sleep(wifiInterval * time.Second)
 			continue
 		}
 
 		if roopTimesCounter >= alertRoopTimes && consecutiveCounter != zeroValue && object.Status == false {
-			//fmt.Println(object.Status)
-			//alertText = setAlertText(object.Name)
-			sendCurlRequest("Put watch on the home position")
+			sendCurlRequest(setAlertText(object.Name))
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter = zeroValue
 			continue

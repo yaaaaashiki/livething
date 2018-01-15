@@ -14,8 +14,6 @@ const (
 	exist = "1"
 )
 
-//Objchan := make(chan model.Object, 1)
-
 type SetCurrentObjectStatusController struct {
 	setCurrentObjectStatusUseCase *usecase.SetCurrentObjectStatusUseCase
 }
@@ -48,15 +46,6 @@ func CheckStatus(c *gin.Context) (bool, string) {
 func SetStatus(c *gin.Context) {
 	object := &model.Object{}
 	object.Status, object.Name = CheckStatus(c)
-
-	//Objchan.Status <- object.Status
-	//Objchan.Name <- object.Name
-	/*
-		fmt.Printf("object status: ")
-		fmt.Println(object.Status)
-		fmt.Println(object.Name)
-	*/
-	//fmt.Println(object.Status) // for debug. TODO remove this code
 }
 
 func (s *SetCurrentObjectStatusController) Execute(c *gin.Context) {
