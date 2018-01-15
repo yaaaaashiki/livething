@@ -8,6 +8,7 @@ import (
 	"github.com/yaaaaashiki/livething/db"
 	"github.com/yaaaaashiki/livething/domain/repository"
 	"github.com/yaaaaashiki/livething/interfaceadapter/controller"
+	"github.com/yaaaaashiki/livething/model"
 	"github.com/yaaaaashiki/livething/slack"
 	"github.com/yaaaaashiki/livething/usecase"
 	"github.com/yaaaaashiki/livething/wifi"
@@ -17,15 +18,6 @@ import (
 type Server struct {
 	db  *gorm.DB
 	gin *gin.Engine
-}
-
-type Object struct {
-	Status bool
-	Name   string
-}
-
-type Wifi struct {
-	Status bool
 }
 
 // New returns server object.
@@ -50,8 +42,8 @@ func (s *Server) Init(dbconf, env string, debug bool) {
 		log.Fatalf("db initialization failed: %s", err)
 	}
 
-	wf := &Wifi{}
-	object := &Object{}
+	wf := &model.Wifi{}
+	object := &model.Object{}
 	s.db = db
 	s.gin = gin.Default()
 	s.Route()

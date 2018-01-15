@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yaaaaashiki/livething"
+	"github.com/yaaaaashiki/livething/model"
 )
 
 const (
@@ -24,7 +24,7 @@ func checkStatus() bool {
 	return false
 }
 
-func SetCurrentStatus(wf *livething.Wifi) {
+func SetCurrentStatus(wf *model.Wifi) {
 	numberOfRoop := 0
 
 	for {

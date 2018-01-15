@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/yaaaaashiki/livething/helper"
+	"github.com/yaaaaashiki/livething/model"
 	"github.com/yaaaaashiki/livething/usecase"
 )
 
@@ -43,7 +44,7 @@ func CheckStatus(c *gin.Context) bool {
 }
 
 func SetStatus(c *gin.Context) {
-	object := &Object{}
+	object := &model.Object{}
 	object.Status = CheckStatus(c)
 
 	//fmt.Println(object.Status) // for debug. TODO remove this code

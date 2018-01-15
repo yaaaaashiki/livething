@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/yaaaaashiki/livething"
+	"github.com/yaaaaashiki/livething/model"
 )
 
 const (
@@ -21,8 +21,6 @@ const (
 	alertRoopTimes       = 5
 	zeroValue            = 0
 )
-
-var alertText string
 
 type Slack struct {
 	Text       string `json:"text"`
@@ -37,7 +35,7 @@ var (
 )
 
 func setAlertText(objectName string) string {
-	alertText = "Put" + objectName + "on the home position"
+	alertText := "Put" + objectName + "on the home position"
 	return alertText
 }
 
@@ -60,11 +58,14 @@ func sendCurlRequest(text string) {
 	println(string(body))
 }
 
-func PostNotification(object *livething.Object, wifi *livething.Wifi) {
+func PostNotification(object *model.Object, wifi *model.Wifi) {
 	roopTimesCounter := zeroValue
 	consecutiveCounter := zeroValue
-
+	alertText := ""
 	for {
+		fmt.Printf("object status: ")
+		fmt.Println(object.Status)
+		fmt.Println(object.Name)
 		if wifi.Status == false {
 			time.Sleep(wifiInterval * time.Second)
 			continue
@@ -72,7 +73,7 @@ func PostNotification(object *livething.Object, wifi *livething.Wifi) {
 
 		if roopTimesCounter >= alertRoopTimes && consecutiveCounter != zeroValue && object.Status == false {
 			//fmt.Println(object.Status)
-			setAlertText(object.Name)
+			alertText = setAlertText(object.Name)
 			sendCurlRequest(alertText)
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter = zeroValue
