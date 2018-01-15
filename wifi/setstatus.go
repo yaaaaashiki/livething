@@ -3,6 +3,8 @@ package wifi
 import (
 	"fmt"
 	"time"
+
+	"github.com/yaaaaashiki/livething"
 )
 
 const (
@@ -11,7 +13,6 @@ const (
 )
 
 //Reference this varibale to check wifi status
-var Status bool
 
 //If ping status is no problem, return true
 //Otherwise, return false
@@ -23,12 +24,12 @@ func checkStatus() bool {
 	return false
 }
 
-func SetCurrentStatus() {
+func SetCurrentStatus(wf *livething.Wifi) {
 	numberOfRoop := 0
 
 	for {
 		fmt.Println(checkStatus())
-		Status = checkStatus()
+		wf.Status = checkStatus()
 		if numberOfRoop != zeroValue {
 			time.Sleep(interval * time.Second)
 		}

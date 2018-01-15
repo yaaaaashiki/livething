@@ -8,8 +8,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/yaaaaashiki/livething/interfaceadapter/controller"
-	"github.com/yaaaaashiki/livething/wifi"
+	"github.com/yaaaaashiki/livething"
 )
 
 const (
@@ -61,13 +60,11 @@ func sendCurlRequest(text string) {
 	println(string(body))
 }
 
-func PostNotification() {
+func PostNotification(object *livething.Object, wifi *livething.Wifi) {
 	roopTimesCounter := zeroValue
 	consecutiveCounter := zeroValue
 
 	for {
-		object := &controller.Object{}
-
 		if wifi.Status == false {
 			time.Sleep(wifiInterval * time.Second)
 			continue

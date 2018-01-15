@@ -19,6 +19,15 @@ type Server struct {
 	gin *gin.Engine
 }
 
+type Object struct {
+	Status bool
+	Name   string
+}
+
+type Wifi struct {
+	Status bool
+}
+
 // New returns server object.
 func New() *Server {
 	return &Server{}
@@ -41,11 +50,13 @@ func (s *Server) Init(dbconf, env string, debug bool) {
 		log.Fatalf("db initialization failed: %s", err)
 	}
 
+	wf := &Wifi{}
+	object := &Object{}
 	s.db = db
 	s.gin = gin.Default()
 	s.Route()
-	go wifi.SetCurrentStatus()
-	go slack.PostNotification()
+	go wifi.SetCurrentStatus(wf)
+	go slack.PostNotification(object, wf)
 }
 
 // Run starts running http server.

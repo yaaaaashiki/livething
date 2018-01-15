@@ -22,11 +22,6 @@ type InputObjectField struct {
 	Name  string `binding:"required" json:"name"`
 }
 
-type Object struct {
-	Status bool
-	Name   string
-}
-
 func NewSetCurrentObjectStatusController(setCurrentObjectStatusUseCase *usecase.SetCurrentObjectStatusUseCase) *SetCurrentObjectStatusController {
 	return &SetCurrentObjectStatusController{
 		setCurrentObjectStatusUseCase: setCurrentObjectStatusUseCase,
