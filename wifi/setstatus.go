@@ -12,6 +12,8 @@ const (
 	zeroValue = 0
 )
 
+Wifichan := make(chan model.Wifi, 1)
+
 //Reference this varibale to check wifi status
 
 //If ping status is no problem, return true
@@ -24,12 +26,12 @@ func checkStatus() bool {
 	return false
 }
 
-func SetCurrentStatus(wf *model.Wifi) {
+func SetCurrentStatus() {
 	numberOfRoop := 0
-
+	
 	for {
 		fmt.Println(checkStatus())
-		wf.Status = checkStatus()
+		Wifichan.Status = checkStatus()
 		if numberOfRoop != zeroValue {
 			time.Sleep(interval * time.Second)
 		}

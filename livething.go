@@ -47,8 +47,12 @@ func (s *Server) Init(dbconf, env string, debug bool) {
 	s.db = db
 	s.gin = gin.Default()
 	s.Route()
-	go wifi.SetCurrentStatus(wf)
-	go slack.PostNotification(object, wf)
+
+	objStruct := <-controller.Objchan
+
+	go wifi.SetCurrentStatus()
+	wifiStruct := <-wifi.Wifichan
+	go slack.PostNotification(objStruct, wifiStruct)
 }
 
 // Run starts running http server.

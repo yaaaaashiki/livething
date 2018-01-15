@@ -14,6 +14,8 @@ const (
 	exist = "1"
 )
 
+Objchan := make(chan model.Object, 1)
+
 type SetCurrentObjectStatusController struct {
 	setCurrentObjectStatusUseCase *usecase.SetCurrentObjectStatusUseCase
 }
@@ -29,24 +31,33 @@ func NewSetCurrentObjectStatusController(setCurrentObjectStatusUseCase *usecase.
 	}
 }
 
-func CheckStatus(c *gin.Context) bool {
+func CheckStatus(c *gin.Context) (bool, string) {
 	object := &InputObjectField{}
 
 	if err := c.MustBindWith(object, binding.JSON); err != nil {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
-		return false
+		return false, ""
 	}
 
 	if object.Value == exist {
-		return true
+		return true, object.Name
 	}
-	return false
+	return false, ""
 }
 
 func SetStatus(c *gin.Context) {
 	object := &model.Object{}
-	object.Status = CheckStatus(c)
+	object.Status, object.Name = CheckStatus(c)
 
+	
+
+	Objchan.Status <- object.Status
+	Objchan.Name <- object.Name
+	/*
+		fmt.Printf("object status: ")
+		fmt.Println(object.Status)
+		fmt.Println(object.Name)
+	*/
 	//fmt.Println(object.Status) // for debug. TODO remove this code
 }
 

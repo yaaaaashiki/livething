@@ -63,9 +63,11 @@ func PostNotification(object *model.Object, wifi *model.Wifi) {
 	consecutiveCounter := zeroValue
 	alertText := ""
 	for {
-		fmt.Printf("object status: ")
-		fmt.Println(object.Status)
-		fmt.Println(object.Name)
+		/*
+			fmt.Printf("object status: ")
+			fmt.Println(object.Status)
+			fmt.Println(object.Name)
+		*/
 		if wifi.Status == false {
 			time.Sleep(wifiInterval * time.Second)
 			continue
