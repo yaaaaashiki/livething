@@ -17,7 +17,7 @@ const (
 	userName             = "livething"
 	returningHomeText    = "Welcome home!!!"
 	iconName             = "warning"
-	illuminationInterval = 60
+	illuminationInterval = 4
 	wifiInterval         = 15
 	alertRoopTimes       = 5
 	zeroValue            = 0
@@ -63,6 +63,7 @@ func sendCurlRequest(text string) {
 
 func PostNotification() {
 	roopTimesCounter := zeroValue
+	consecutiveCounter := zeroValue
 
 	for {
 		object := &controller.Object{}
@@ -72,7 +73,8 @@ func PostNotification() {
 			continue
 		}
 
-		if roopTimesCounter >= alertRoopTimes {
+		if roopTimesCounter >= alertRoopTimes && consecutiveCounter != zeroValue && object.Status == false {
+			//fmt.Println(object.Status)
 			setAlertText(object.Name)
 			sendCurlRequest(alertText)
 			time.Sleep(illuminationInterval * time.Second)
@@ -80,7 +82,7 @@ func PostNotification() {
 			continue
 		}
 
-		if roopTimesCounter == zeroValue {
+		if roopTimesCounter == zeroValue && consecutiveCounter == zeroValue {
 			sendCurlRequest(returningHomeText)
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter++
@@ -90,6 +92,7 @@ func PostNotification() {
 		if object.Status == false {
 			time.Sleep(illuminationInterval * time.Second)
 			roopTimesCounter++
+			consecutiveCounter++
 		}
 	}
 }

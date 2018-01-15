@@ -1,7 +1,6 @@
 package wifi
 
 import (
-	"fmt"
 	"log"
 
 	ping "github.com/sparrc/go-ping"
@@ -21,6 +20,6 @@ func sendPing() *ping.Statistics {
 	pinger.Count = sendPingTimes
 	pinger.Run()               // blocks until finished
 	res := pinger.Statistics() // get send/receive/rtt stats
-	fmt.Println(res)
+	//fmt.Println(res)
 	return res
 }

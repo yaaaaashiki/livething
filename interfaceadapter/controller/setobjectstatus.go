@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -52,7 +51,7 @@ func SetStatus(c *gin.Context) {
 	object := &Object{}
 	object.Status = CheckStatus(c)
 
-	fmt.Println(object.Status) // for debug. TODO remove this code
+	//fmt.Println(object.Status) // for debug. TODO remove this code
 }
 
 func (s *SetCurrentObjectStatusController) Execute(c *gin.Context) {
