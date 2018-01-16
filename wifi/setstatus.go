@@ -11,10 +11,6 @@ const (
 	zeroValue = 0
 )
 
-//Wifichan := make(chan model.Wifi, 1)
-
-//Reference this varibale to check wifi status
-
 //If ping status is no problem, return true
 //Otherwise, return false
 func checkStatus() bool {
